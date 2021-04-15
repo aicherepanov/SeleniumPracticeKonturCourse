@@ -15,7 +15,7 @@ namespace SeleniumPracticeKonturCourse
 
         public SeleniumPracticePage(ChromeDriver driver)
         {
-            this.Driver = driver;
+            Driver = driver;
         }
 
         public void Open()
@@ -25,7 +25,7 @@ namespace SeleniumPracticeKonturCourse
 
         public MainForm GetMainForm()
         {
-            return new MainForm(this.Driver);
+            return new MainForm(Driver);
         }
     }
 }

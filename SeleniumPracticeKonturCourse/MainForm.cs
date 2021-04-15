@@ -19,16 +19,16 @@ namespace SeleniumPracticeKonturCourse
 
         private readonly By _maleRadioLocator = By.Id("boy");
         private readonly By _femaleRadioLocator = By.Id("girl");
-        private readonly By _emailInputLocator = By.Name("email");
+        public readonly By EmailInputLocator = By.Name("email");
         private readonly By _formErrorLocator = By.ClassName("form-error");
         private readonly By _submitButtonLocator = By.Id("sendMe");
         private readonly By _resultTextLocator = By.ClassName("result-text");
         private readonly By _yourEmailLocator = By.ClassName("your-email");
-        private readonly By _anotherEmailLinkLocator = By.Id("anotherEmail");
+        public readonly By AnotherEmailLinkLocator = By.Id("anotherEmail");
         
-        public void TypeEmail(String email)
+        public void TypeEmail(string email)
         {
-            var emailInput = Driver.FindElement(_emailInputLocator);
+            var emailInput = Driver.FindElement(EmailInputLocator);
             emailInput.Click();
             emailInput.SendKeys(email);
         }
@@ -64,6 +64,22 @@ namespace SeleniumPracticeKonturCourse
         public string GetErrorText()
         {
             return Driver.FindElement(_formErrorLocator).Text;
+        }
+
+        public void SendRequestFirstTime()
+        {
+            ChooseFemale();
+
+            const string expectedEmail = "test@mail.ru";
+            TypeEmail(expectedEmail);
+
+            ClickSubmitButton();
+        }
+
+        public void ClickAnotherEmail()
+        {
+            var anotherEmailLink = Driver.FindElement(AnotherEmailLinkLocator);
+            anotherEmailLink.Click();
         }
     }
 }

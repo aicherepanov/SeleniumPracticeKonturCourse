@@ -89,6 +89,22 @@ namespace SeleniumPracticeKonturCourse
             Assert.AreEqual(expectedErrorText, resultErrorText, "Не совпадает текст валидации пустого поля Email");
         }
 
+        [Test]
+        public void Choose_Another_Email_Success()
+        {
+            var seleniumPracticePage = new SeleniumPracticePage(driver);
+            seleniumPracticePage.Open();
+
+            var mainForm = seleniumPracticePage.GetMainForm();
+
+            mainForm.SendRequestFirstTime();
+
+            mainForm.ClickAnotherEmail();
+
+            Assert.AreEqual(string.Empty, driver.FindElement(mainForm.EmailInputLocator).Text, "Поле emailInput не очистилось после клика по ссылке Указать другой Email");
+            Assert.IsFalse(driver.FindElement(mainForm.AnotherEmailLinkLocator).Displayed, "Не исчезла ссылка");
+        }
+
         [TearDown]
         public void TeadDown()
         {
