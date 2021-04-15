@@ -105,6 +105,25 @@ namespace SeleniumPracticeKonturCourse
             Assert.IsFalse(driver.FindElement(mainForm.AnotherEmailLinkLocator).Displayed, "Не исчезла ссылка");
         }
 
+        [Test]
+        public void Type_Invalid_Email()
+        {
+            var seleniumPracticePage = new SeleniumPracticePage(driver);
+            seleniumPracticePage.Open();
+
+            var mainForm = seleniumPracticePage.GetMainForm();
+
+            const string invalidEmail = "test@mail";
+            mainForm.TypeEmail(invalidEmail);
+
+            mainForm.ClickSubmitButton();
+
+            const string expectedErrorText = "Некорректный email";
+            var resultErrorText = mainForm.GetErrorText();
+
+            Assert.AreEqual(expectedErrorText, resultErrorText, "Не совпадает текст валидации некорректного Email-адреса");
+        }
+
         [TearDown]
         public void TeadDown()
         {
